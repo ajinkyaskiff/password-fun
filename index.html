@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .selector-for-some-widget {
+            box-sizing: content-box;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <code>/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/</code>
+            </a>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row justify-content-md-center" style="margin-top: 50px;">
+
+            <h1 style="text-align: center;">Password Regex</h1>
+            <div class="col col-lg-6 bd-example-snippet bd-code-snippet">
+                <form class="bd-example m-0 border-0">
+                    <!-- <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            value="test@t.c" required>
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div> -->
+                    <div class="mb-3">
+                        <label for="passwordData" class="form-label">Enter Password</label>
+                        <span class="text-success float-end" id="counter"></span>
+                        <input type="text" class="form-control form-control-lg" id="passwordData" autocomplete="false"
+                            autofocus onkeyup="passwordRegex()" required>
+                    </div>
+                    <div class="mb-3">
+                        <div id="errorMessage" class="border border-warning bg-warning-subtle p-2 mb-2"
+                            style="display: none;"></div>
+                    </div>
+                    <div class="d-grid gap-2" style="margin-top: 20px;">
+                        <button type="submit" class="btn btn-success">Check</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function passwordRegex() {
+            console.log("12");
+            $('#errorMessage').hide();
+            var pass = $('#passwordData').val();
+            $('#counter').html(pass.length);
+            var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+            var smallLetters = /.*[a-z]/;
+            var capLetters = /[A-Z]/;
+            var numbers = /[0-9]/;
+            var specialChar = /[!@#$]/;
+            var min = /.{6,}/;
+            var max = /^.{6,16}$/;
+
+            if (!smallLetters.test(pass)) {
+                $('#errorMessage').show();
+                $('#errorMessage').html(errorMessage("Please add atleast 1 small letter"));
+                return;
+            } if (!capLetters.test(pass)) {
+                $('#errorMessage').show();
+                $('#errorMessage').html(errorMessage("Please add atleast 1 capital letter"));
+                return;
+            } if (!numbers.test(pass)) {
+                $('#errorMessage').show();
+                $('#errorMessage').html(errorMessage("Please add atleast 1 number"));
+                return;
+            } if (!specialChar.test(pass)) {
+                $('#errorMessage').show();
+                $('#errorMessage').html(errorMessage("Please add atleast 1 special character"));
+                return;
+            } if (!min.test(pass)) {
+                $('#errorMessage').show();
+                $('#errorMessage').html(errorMessage("Please add minimum 6 characters"));
+                return;
+            } if (!max.test(pass)) {
+                $('#errorMessage').show();
+                $('#errorMessage').html(errorMessage("Please add maximum 16 characters"));
+                return;
+            } else {
+                $('#errorMessage').hide();
+                return;
+            }
+        }
+
+        function errorMessage(msg) {
+            msg = "<code><i class='fa-solid fa-triangle-exclamation'></i> <b>Notice:</b> <br /><br /><code>" + msg + "</code>";
+            return msg;
+        }
+    </script>
+</body>
+
+</html>
