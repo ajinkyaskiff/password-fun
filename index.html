@@ -36,7 +36,7 @@
 
             <h1 style="text-align: center;">Password Regex</h1>
             <div class="col col-lg-6 bd-example-snippet bd-code-snippet">
-                <form class="bd-example m-0 border-0">
+                <div class="bd-example m-0 border-0">
                     <!-- <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
@@ -56,15 +56,16 @@
                     <div class="d-grid gap-2" style="margin-top: 20px;">
                         <button type="submit" class="btn btn-success">Check</button>
                     </div>
-                </form>
-
+                </div>
+                
             </div>
+            
         </div>
     </div>
 
     <script type="text/javascript">
         function passwordRegex() {
-            console.log("12");
+            //console.log("12");
             $('#errorMessage').hide();
             var pass = $('#passwordData').val();
             $('#counter').html(pass.length);
@@ -75,6 +76,9 @@
             var specialChar = /[!@#$]/;
             var min = /.{6,}/;
             var max = /^.{6,16}$/;
+            var chessMoves = /[A-H][0-8]/;
+            var emoji = /(\:\w+\:|\<[\/\\]?3|[\(\)\\\D|\*\$][\-\^]?[\:\;\=]|[\:\;\=B8][\-\^]?[3DOPp\@\$\*\\\)\(\/\|])(?=\s|[\!\.\?]|$)/g;
+
 
             if (!smallLetters.test(pass)) {
                 $('#errorMessage').show();
@@ -100,16 +104,28 @@
                 $('#errorMessage').show();
                 $('#errorMessage').html(errorMessage("Please add maximum 16 characters"));
                 return;
+            } if (!chessMoves.test(pass)) {
+                $('#errorMessage').show();
+                $('#errorMessage').html(errorMessage("Please add atleast one chess move (A1 - H9)"));
+                return;
+            } if (!emoji.test(pass)) {
+                $('#errorMessage').show();
+                $('#errorMessage').html(errorMessage("Please add atleast one emoji"));
+                //getRandomImage();
+                return;
             } else {
                 $('#errorMessage').hide();
                 return;
             }
         }
+        
+        
 
         function errorMessage(msg) {
             msg = "<code><i class='fa-solid fa-triangle-exclamation'></i> <b>Notice:</b> <br /><br /><code>" + msg + "</code>";
             return msg;
         }
+
     </script>
 </body>
 
