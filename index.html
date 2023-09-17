@@ -57,9 +57,15 @@
                         <button type="submit" class="btn btn-success">Check</button>
                     </div>
                 </div>
-                
+
             </div>
-            
+            <div class="bd-example m-0 border-0">
+                <div class="mb-3" id="">
+                    <button class="btn btn-danger" onclick="getRandomImage()">Image Random</button>
+                    <div id="randomImage"></div>
+
+                </div>
+            </div>
         </div>
     </div>
 
@@ -104,9 +110,9 @@
                 $('#errorMessage').show();
                 $('#errorMessage').html(errorMessage("Please add maximum 16 characters"));
                 return;
-            } if (!chessMoves.test(pass)) {
+            } if (!validateChessMove(pass)) {
                 $('#errorMessage').show();
-                $('#errorMessage').html(errorMessage("Please add atleast one chess move (A1 - H9)"));
+                $('#errorMessage').html(errorMessage("Please add atleast one chess move"));
                 return;
             } if (!emoji.test(pass)) {
                 $('#errorMessage').show();
@@ -118,8 +124,44 @@
                 return;
             }
         }
-        
-        
+
+        function validateChessMove(move) {
+            const regex = /^([KQBNRP][a-h][1-8]|[a-h][a-h][1-8]|[KQBNRP])(x)?[a-h][1-8](=[KQBNR])?(\+{1,2})?$/;
+
+            return regex.test(move);
+        }
+
+        function displayBase64Image(placeholder, base64Image) {
+            placeholder.html('');
+            $('<img>', {
+                src: base64Image
+            }).appendTo(placeholder);
+        }
+        function getRandomImage() {
+            var data = 'https://api-ninjas.com';
+            var category = 'nature'
+            $.ajax({
+                method: 'GET',
+                url: 'https://api.api-ninjas.com/v1/randomimage?category=' + category + '&height=100&width=100',
+                headers: { 'X-Api-Key': 'dS79rBcBH4Qub/r/zk/ZNg==GkgOmEvb5dk45u3h', 'Accept': 'image/jpg' },
+                success: function (result) {
+                    console.log(result);
+                    //$('#randomImage').attr('src', 'data:image/png;base64,'.result);
+                    // image placeholder where the image will be displayed
+                    //var imagePlaceholder = document.getElementById('randomImage');
+                    var imagePlaceholder = $('#randomImage');
+
+                    var base64Image = 'data:image/jpeg;base64, ' + result;
+                    //var base64Image = result;
+                    // display the image in placeholder
+                    displayBase64Image(imagePlaceholder, base64Image);
+
+                },
+                error: function ajaxError(jqXHR) {
+                    console.error('Error: ', jqXHR.responseText);
+                }
+            });
+        }
 
         function errorMessage(msg) {
             msg = "<code><i class='fa-solid fa-triangle-exclamation'></i> <b>Notice:</b> <br /><br /><code>" + msg + "</code>";
