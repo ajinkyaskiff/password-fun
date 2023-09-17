@@ -110,7 +110,7 @@
                 $('#errorMessage').show();
                 $('#errorMessage').html(errorMessage("Please add maximum 16 characters"));
                 return;
-            } if (!validateChessMove(pass)) {
+            } if (!chessMoves.test(pass)) {
                 $('#errorMessage').show();
                 $('#errorMessage').html(errorMessage("Please add atleast one chess move"));
                 return;
