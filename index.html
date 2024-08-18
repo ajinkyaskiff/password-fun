@@ -154,7 +154,10 @@
                     var base64Image = 'data:image/jpg;base64, ' + result;
                     //var base64Image = result;
                     // display the image in placeholder
-                    displayBase64Image(imagePlaceholder, result);
+                    //displayBase64Image(imagePlaceholder, result);
+                    var img = $('<img id="image_id">');
+img.attr('src', 'data:image/jpg;base64,' + result);
+img.appendTo('#randomImage');
 
                 },
                 error: function ajaxError(jqXHR) {
