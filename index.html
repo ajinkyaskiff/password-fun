@@ -145,7 +145,7 @@
                 url: 'https://api.api-ninjas.com/v1/randomimage?category=' + category + '&height=100&width=100',
                 headers: { 'X-Api-Key': 'dS79rBcBH4Qub/r/zk/ZNg==GkgOmEvb5dk45u3h', 'Content-Type': 'image/jpg' },
                 success: function (result) {
-                    console.log(result);
+                    //console.log(result);
                     //$('#randomImage').attr('src', 'data:image/png;base64,'.result);
                     // image placeholder where the image will be displayed
                     //var imagePlaceholder = document.getElementById('randomImage');
@@ -154,10 +154,8 @@
                     var base64Image = 'data:image/jpg;base64, ' + result;
                     //var base64Image = result;
                     // display the image in placeholder
-                    //displayBase64Image(imagePlaceholder, result);
-                    var img = $('<img id="image_id">');
-img.attr('src', 'data:image/jpeg;base64,' + result);
-img.appendTo('#randomImage');
+                   displayBase64Image(imagePlaceholder, result);
+                   
 
                 },
                 error: function ajaxError(jqXHR) {
