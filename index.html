@@ -143,7 +143,7 @@
             $.ajax({
                 method: 'GET',
                 url: 'https://api.api-ninjas.com/v1/randomimage?category=' + category + '&height=100&width=100',
-                headers: { 'X-Api-Key': 'dS79rBcBH4Qub/r/zk/ZNg==GkgOmEvb5dk45u3h', 'Accept': 'image/jpg' },
+                headers: { 'X-Api-Key': 'dS79rBcBH4Qub/r/zk/ZNg==GkgOmEvb5dk45u3h', 'Content-Type': 'image/jpg' },
                 success: function (result) {
                     console.log(result);
                     //$('#randomImage').attr('src', 'data:image/png;base64,'.result);
@@ -156,7 +156,7 @@
                     // display the image in placeholder
                     //displayBase64Image(imagePlaceholder, result);
                     var img = $('<img id="image_id">');
-img.attr('src', 'data:image/jpg;base64,' + result);
+img.attr('src', 'data:image/jpeg;base64,' + result);
 img.appendTo('#randomImage');
 
                 },
